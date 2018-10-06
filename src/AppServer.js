@@ -1,6 +1,8 @@
 import { makeEntitiesFromStructures, use } from 'katejs';
 import { structures, title, packageName } from './structure';
 
+import Commands from './entities/Commands';
+
 const AppServer = parent => class Server extends use(parent) {
   constructor(params) {
     super(params);
@@ -20,6 +22,7 @@ const AppServer = parent => class Server extends use(parent) {
     //   ...
     // }
     // Можно изменять сущности через this.entities[_entity_name_]
+    this.entities.Commands = Commands;
   }
 };
 AppServer.package = packageName;

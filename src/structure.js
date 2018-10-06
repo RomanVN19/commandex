@@ -1,4 +1,5 @@
-import Fields from 'katejs/lib/fields';
+// import Fields from 'katejs/lib/fields';
+import Fields from 'katejs/fields'; // local
 
 const Task = {
   name: 'task',
@@ -21,8 +22,8 @@ const Task = {
   ],
 };
 
-export const title = 'Boilerplate app';
-export const packageName = 'boilerplate_app';
+export const title = 'S-commander';
+export const packageName = 's-commander';
 export const structures = {
   Task,
 };
