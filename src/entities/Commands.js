@@ -5,25 +5,34 @@ import { exec as execNode } from 'child_process';
 const exec = util.promisify(execNode);
 
 export default class Commands {
-
-  loadCommands() {
-    if (!this.data) {
+  constructor() {
+    this.loadCommands();
+  }
+  loadCommands(params) {
+    const force = params && params.data.force;
+    if (!this.data || force) {
       const data = fs.readFileSync(`${process.cwd()}/s-commander-data.json`);
       this.data = JSON.parse(data);
     }
+    return { response: this.data.commands };
   }
   async getCommands() {
-    this.loadCommands();
     return { response: this.data.commands };
   }
   async getCommand({ data }) {
-    this.loadCommands();
     return { response: this.data.commands[data] };
   }
   async execCommand({ data }) {
-    this.loadCommands();
-    console.log('exec', this.data.commands[data]);
-    const { stdout, stderr } = await exec(this.data.commands[data].command);
-    return { response: stdout, error: stderr };
+    let commands = this.data.commands[data].command;
+    if (typeof commands === 'string') commands = [commands];
+    let response = '';
+    let error = '';
+    for (let i = 0; i < commands.length; i++) {
+      // eslint-disable-next-line no-await-in-loop
+      const { stdout, stderr } = await exec(commands[i]);
+      response += `${stdout}\n`;
+      error += stderr ? `${stderr}\n` : '';
+    }
+    return { response, error };
   }
 }

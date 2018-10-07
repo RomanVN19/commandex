@@ -1,5 +1,5 @@
 {
-  "path": "/",
+  "path": "/dhdev",
   "commands": [
     {
       "title": "dir",
@@ -8,6 +8,14 @@
     {
       "title": "dir1",
       "command": "dir c:\\windows"
+    },
+    {
+      "title": "dir2",
+      "command": ["dir c:\\windows","dir c:\\ospanel"]
+    },
+    {
+      "title": "dir4",
+      "command": "dir c:\\ospanel"
     }
   ]
 }

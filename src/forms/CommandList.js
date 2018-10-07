@@ -6,7 +6,13 @@ export default class CommandsList extends Form {
   constructor(sys) {
     super(sys);
     this.init({
-      actions: [],
+      actions: [
+        {
+          type: Elements.BUTTON,
+          onClick: this.reload,
+          title: 'Reload',
+        }
+      ],
       elements: [
         {
           id: 'list',
@@ -23,6 +29,12 @@ export default class CommandsList extends Form {
   }
   async load() {
     const { response } = await this.app.Commands.getCommands();
+    if (response) {
+      this.content.list.value = response;
+    }
+  }
+  reload = async () => {
+    const { response } = await this.app.Commands.loadCommands({ force: true });
     if (response) {
       this.content.list.value = response;
     }

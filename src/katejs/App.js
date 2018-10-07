@@ -95,33 +95,4 @@ export default class PlatformApp extends App {
       });
     });
   }
-  // eslint-disable-next-line class-methods-use-this
-  async request(url, params) {
-    console.log('local fetch');
-    return fetch(url, {
-      headers: {
-        'content-type': 'application/json',
-      },
-      ...params,
-    })
-      .then((response) => {
-        if (response.headers.get('content-type').indexOf('application/json') === -1) {
-          return response
-            .text()
-            .then(data => ({ response, data }))
-            .catch(() => ({ response }))
-        }
-        return response
-          .json()
-          .then(data => ({ response, data }))
-          .catch(() => ({ response }))
-      })
-      .then(({ response, data }) => {
-        if (response.ok) {
-          return ({ response: data });
-        }
-        return ({ error: data });
-      })
-      .catch(error => ({ error }));
-  }
 }

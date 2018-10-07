@@ -24,7 +24,7 @@ export default class Command extends Form {
           id: 'label',
           type: Elements.LABEL,
           title: 'Command',
-          tag: 'h2',
+          tag: 'h5',
         },
         {
           id: 'input',
@@ -39,8 +39,8 @@ export default class Command extends Form {
   async loadCommand() {
     const { response } = await this.app.Commands.getCommand(this.commandIndex);
     if (response) {
-      this.command = response;
-      this.content.label.title = `Command: ${this.command.title}`;
+      this.content.label.title = Array.isArray(response.command) ? response.command.join('; ') : response.command;
+      this.content.form.title = `Command: ${response.title}`;
     }
   }
   exec = async () => {
