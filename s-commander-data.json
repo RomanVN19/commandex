@@ -1,0 +1,13 @@
+{
+  "path": "/",
+  "commands": [
+    {
+      "title": "dir",
+      "command": "dir"
+    },
+    {
+      "title": "dir1",
+      "command": "dir c:\\windows"
+    }
+  ]
+}

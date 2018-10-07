@@ -3,14 +3,15 @@ import { use } from 'katejs/client'; // local
 
 import { structures, title, packageName } from './structure';
 
-import CommandsList from './forms/CommandsList';
+import CommandsList from './forms/CommandList';
+import CommandsItem from './forms/CommandItem';
 
 const AppClient = parent => class Client extends use(parent) {
   static title = title;
   constructor(params) {
     super(params);
     this.init({ structures });
-    this.addForm(CommandsList);
+    this.addForms({ CommandsList, CommandsItem });
     this.menu.push({
       title: 'Commands',
       form: CommandsList,

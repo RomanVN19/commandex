@@ -53,22 +53,27 @@ export default class PlatformApp extends App {
     this.allForms = makeFormsFromStructure({ structures, menu: this.menu });
     this.forms = [];
     this.baseUrl = '/api';
-    Object.values(this.allForms).forEach(form => this.addForm(form));
+    this.addForms(this.allForms);
     this.makeApiLinks({ entities: Object.keys(structures) });
   }
-  addForm(form) {
-    let found;
-    this.forms.forEach((item) => {
-      if (form.path.indexOf(item.path) > -1) {
-        found = true;
+  addForms(forms) {
+
+    Object.keys(forms).forEach((formName) => {
+      let found;
+      const form = forms[formName];
+      this.allForms[formName] = form;
+      this.forms.forEach((item) => {
+        if (form.path.indexOf(item.path) > -1) {
+          found = true;
+        }
+      });
+
+      if (found) {
+        this.forms.unshift(form);
+      } else {
+        this.forms.push(form);
       }
     });
-
-    if (found) {
-      this.forms.unshift(form);
-    } else {
-      this.forms.push(form);
-    }
   }
   makeApiLinks({ entities }) {
     const app = this;
@@ -92,6 +97,7 @@ export default class PlatformApp extends App {
   }
   // eslint-disable-next-line class-methods-use-this
   async request(url, params) {
+    console.log('local fetch');
     return fetch(url, {
       headers: {
         'content-type': 'application/json',
@@ -99,7 +105,7 @@ export default class PlatformApp extends App {
       ...params,
     })
       .then((response) => {
-        if (response.headers.get('content-type') !== 'application/json') {
+        if (response.headers.get('content-type').indexOf('application/json') === -1) {
           return response
             .text()
             .then(data => ({ response, data }))
