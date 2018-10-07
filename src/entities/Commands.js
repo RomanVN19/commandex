@@ -16,10 +16,10 @@ export default class Commands {
     }
     return { response: this.data.commands };
   }
-  async getCommands() {
+  getCommands() {
     return { response: this.data.commands };
   }
-  async getCommand({ data }) {
+  getCommand({ data }) {
     return { response: this.data.commands[data] };
   }
   async execCommand({ data }) {

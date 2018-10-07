@@ -1,11 +1,11 @@
-// import { use } from 'katejs/lib/client';
-import { use } from 'katejs/client'; // local
+import { use } from 'katejs/lib/client';
+// import { use } from 'katejs/client'; // local
+
+
+import CommandsList from 'forms/CommandList';
+import CommandsItem from 'forms/CommandItem';
 
 import { structures, title, packageName } from './structure';
-
-import CommandsList from './forms/CommandList';
-import CommandsItem from './forms/CommandItem';
-
 import cfg from '../s-commander-data.json';
 
 const AppClient = parent => class Client extends use(parent) {

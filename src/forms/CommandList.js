@@ -1,4 +1,5 @@
-import { Form, Elements } from 'katejs/client';
+import { Form, Elements } from 'katejs/lib/client';
+// import { Form, Elements } from 'katejs/client'; // local
 
 export default class CommandsList extends Form {
   static title = 'Commands';
