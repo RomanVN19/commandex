@@ -1,5 +1,7 @@
 {
   "path": "/dhdev",
+  "host": "127.0.0.7",
+  "port": 2000,
   "commands": [
     {
       "title": "dir",

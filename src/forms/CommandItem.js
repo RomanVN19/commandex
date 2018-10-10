@@ -32,6 +32,7 @@ export default class Command extends Form {
           type: Elements.INPUT,
           rows: 20,
           rowsMax: 100,
+          style: { fontFamily: '"Courier New", Courier, monospace' },
         }
       ],
     });
