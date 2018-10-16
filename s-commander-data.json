@@ -1,6 +1,6 @@
 {
-  "path": "/dhdev",
-  "host": "127.0.0.7",
+  "path": "/sc",
+  "host": "0.0.0.0",
   "port": 2000,
   "commands": [
     {
