@@ -8,6 +8,7 @@ export default class Commands {
   constructor() {
     this.loadCommands();
   }
+
   loadCommands(params) {
     const force = params && params.data.force;
     if (!this.data || force) {
@@ -16,26 +17,28 @@ export default class Commands {
     }
     return { response: this.data.commands };
   }
+
   getCommands() {
     return { response: this.data.commands };
   }
+
   getCommand({ data }) {
     return { response: this.data.commands[data.commandIndex] };
   }
+
   async execCommand({ data }) {
     let commands = this.data.commands[data.commandIndex].command;
     if (typeof commands === 'string') commands = [commands];
     let response = '';
-    let error = '';
-    for (let i = 0; i < commands.length; i++) {
-      // eslint-disable-next-line no-await-in-loop
+    for (let i = 0; i < commands.length; i += 1) {
       try {
+        // eslint-disable-next-line no-await-in-loop
         const { stdout } = await exec(commands[i]);
         response += `${stdout}\n`;
       } catch (e) {
         response += `ERROR: ${e.message}`;
       }
     }
-    return { response, error };
+    return { response };
   }
 }

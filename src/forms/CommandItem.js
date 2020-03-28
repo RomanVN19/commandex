@@ -3,6 +3,7 @@ import { Form, Elements } from 'katejs/lib/client';
 
 export default class Command extends Form {
   static title = 'Command';
+
   constructor(args) {
     super(args);
     this.commandIndex = args.params.id;
@@ -16,7 +17,7 @@ export default class Command extends Form {
       {
         type: Elements.BUTTON,
         title: 'CLOSE',
-        onClick: this.close
+        onClick: this.close,
       },
     ];
 
@@ -38,18 +39,21 @@ export default class Command extends Form {
 
     this.loadCommand();
   }
+
   async loadCommand() {
     const { response } = await this.app.Commands.getCommand({ commandIndex: +this.commandIndex });
-    console.log('reso', response);
     if (response) {
       this.content.label.title = Array.isArray(response.command) ? response.command.join('; ') : response.command;
       this.content.form.title = `Command: ${response.title}`;
     }
   }
+
   exec = async () => {
-    const { response, error } = await this.app.Commands.execCommand({ commandIndex: this.commandIndex });
+    const { response, error } = await this.app
+      .Commands.execCommand({ commandIndex: this.commandIndex });
     this.content.input.value = response || error;
-  }
+  };
+
   close = () => {
     this.app.open('CommandsList');
   }
