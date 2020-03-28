@@ -1,5 +1,5 @@
 
-export const title = 'S-commander';
-export const packageName = 's-commander';
+export const title = 'CommandEx';
+export const packageName = 'commandex';
 export const structures = {
 };

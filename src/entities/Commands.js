@@ -11,7 +11,7 @@ export default class Commands {
   loadCommands(params) {
     const force = params && params.data.force;
     if (!this.data || force) {
-      const data = fs.readFileSync(`${process.cwd()}/s-commander-data.json`);
+      const data = fs.readFileSync(`${process.cwd()}/commandex-data.json`);
       this.data = JSON.parse(data);
     }
     return { response: this.data.commands };
@@ -20,18 +20,21 @@ export default class Commands {
     return { response: this.data.commands };
   }
   getCommand({ data }) {
-    return { response: this.data.commands[data] };
+    return { response: this.data.commands[data.commandIndex] };
   }
   async execCommand({ data }) {
-    let commands = this.data.commands[data].command;
+    let commands = this.data.commands[data.commandIndex].command;
     if (typeof commands === 'string') commands = [commands];
     let response = '';
     let error = '';
     for (let i = 0; i < commands.length; i++) {
       // eslint-disable-next-line no-await-in-loop
-      const { stdout, stderr } = await exec(commands[i]);
-      response += `${stdout}\n`;
-      error += stderr ? `${stderr}\n` : '';
+      try {
+        const { stdout } = await exec(commands[i]);
+        response += `${stdout}\n`;
+      } catch (e) {
+        response += `ERROR: ${e.message}`;
+      }
     }
     return { response, error };
   }

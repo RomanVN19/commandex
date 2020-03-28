@@ -1,7 +1,4 @@
 {
-  "path": "/sc",
-  "host": "0.0.0.0",
-  "port": 2000,
   "commands": [
     {
       "title": "dir",

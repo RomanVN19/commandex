@@ -3,29 +3,27 @@ import { Form, Elements } from 'katejs/lib/client';
 
 export default class CommandsList extends Form {
   static title = 'Commands';
-  static path = '/commands';
   constructor(sys) {
     super(sys);
-    this.init({
-      actions: [
-        {
-          type: Elements.BUTTON,
-          onClick: this.reload,
-          title: 'Reload',
-        }
-      ],
-      elements: [
-        {
-          id: 'list',
-          type: Elements.TABLE,
-          rowClick: this.openCommand,
-          columns: [
-            { title: 'Name', dataPath: 'title' },
-          ],
-          value: [],
-        },
-      ]
-    });
+    this.elements = [
+      {
+        id: 'list',
+        type: Elements.TABLE,
+        rowClick: this.openCommand,
+        columns: [
+          { title: 'Name', dataPath: 'title' },
+        ],
+        value: [],
+      },
+    ];
+    this.actions = [
+      {
+        type: Elements.BUTTON,
+        onClick: this.reload,
+        title: 'Reload',
+      },
+    ];
+
     this.load();
   }
   async load() {
@@ -41,6 +39,6 @@ export default class CommandsList extends Form {
     }
   }
   openCommand = (row, index) => {
-    this.app.open(this.app.allForms.CommandsItem, { id: index });
+    this.app.open('CommandsItem', { id: index });
   }
 }
