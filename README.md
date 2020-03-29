@@ -1,11 +1,14 @@
 # CommandEx - Command Executor
 
-## Установка и запуск
-
+## Установка
 ````
 git clone https://github.com/romannep/commandex.git
 cd commandex
 npm install
+````
+Настройте номер порта и измените поле `jwtSecret` в файле `env.json`
+## Запуск
+````
 npm start
 ````
 
