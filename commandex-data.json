@@ -1,20 +1,16 @@
 {
   "commands": [
     {
-      "title": "dir",
+      "title": "list files",
       "command": "dir"
     },
     {
-      "title": "dir1",
+      "title": "list files in folder",
       "command": "dir c:\\windows"
     },
     {
-      "title": "dir2",
-      "command": ["dir c:\\windows","dir c:\\ospanel"]
-    },
-    {
-      "title": "dir4",
-      "command": "dir c:\\ospanel"
+      "title": "exec several commands",
+      "command": ["dir c:\\windows","dir c:\\"]
     }
   ]
 }
